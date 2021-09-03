@@ -1,7 +1,7 @@
 package com.example.weatherapp.Model
 
 data class WeatherInfo(
-    var weather : Weather? = null,
+    var weather: ArrayList<Weather> = arrayListOf<Weather>(),
     val main : Main? = null,
     val wind: Wind? = null
 )

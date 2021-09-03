@@ -1,8 +1,10 @@
 package com.example.weatherapp.ViewModel
 
-import android.arch.lifecycle.ViewModel
+
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.weatherapp.AppState
 import com.example.weatherapp.Model.API.WeatherAPIImpl
 import kotlinx.coroutines.*
@@ -14,18 +16,17 @@ class WeatherViewModel(
 ) : ViewModel(), CoroutineScope by MainScope() {
 
 
-    fun getData(cityName : String): LiveData<AppState> {
-        getDataFromServer(cityName)
+    fun getData(): LiveData<AppState> {
         return liveDataForViewToObserve
     }
 
-    private fun getDataFromServer(cityName : String) {
+    fun getDataFromServer(cityName : String) {
         liveDataForViewToObserve.value = AppState.Loading(null)
         val apiKey = "3de78552f2c15e641fa7316e79d694cc"
         val units = "metric"
-        launch {
-            val job = async(Dispatchers.IO) { retrofitImpl.getRetrofitImpl().getWeather(cityName,apiKey,units) }
-            liveDataForViewToObserve.value = AppState.Success(job.await().execute().body()!!)
+        launch{
+            val job = async(Dispatchers.IO) { retrofitImpl.getRetrofitImpl().getWeather(cityName,apiKey,units).execute().body() }
+            liveDataForViewToObserve.value = AppState.Success(job.await()!!)
         }
     }
 

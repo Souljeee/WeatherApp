@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+    <string name="search_title">Search a city</string>
+    <string name="Search_hint">Search</string>
+    <string name="search_help_text">Enter the desired city</string>
+    <string name="temperature_title">Temperature</string>
+    <string name="feels_like_title">Feels like</string>
+    <string name="minimum_temperature_title">Minimum temperature</string>
+    <string name="maximum_temperature_title">Maximum temperature</string>
+    <string name="wind_speed_title">Wind speed</string>
+    <string name="weather_description_title">Weather description</string>
 </resources>
