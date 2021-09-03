@@ -1,5 +1,7 @@
 package com.example.weatherapp.View;
 
+import static org.koin.android.compat.ViewModelCompat.getViewModel;
+import static org.koin.android.compat.ViewModelCompat.viewModel;
 import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -20,6 +22,12 @@ import com.example.weatherapp.ViewModel.WeatherViewModel;
 import com.example.weatherapp.databinding.WeatherFragmentBinding;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.lang.reflect.InvocationTargetException;
+
+import kotlin.Lazy;
+
+import static org.koin.java.KoinJavaComponent.inject;
 
 
 public class WeatherFragment extends Fragment {
@@ -49,7 +57,7 @@ public class WeatherFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(WeatherViewModel.class);
+        mViewModel = getViewModel(this,WeatherViewModel.class);
         mViewModel.getData().observe((LifecycleOwner) getViewLifecycleOwner(), new Observer<AppState>() {
             @Override
             public void onChanged(AppState appState) {
@@ -61,15 +69,13 @@ public class WeatherFragment extends Fragment {
 
     private void renderData(AppState appState){
         if(appState instanceof AppState.Success){
-            Log.d("tag","салам тут все норм");
             WeatherInfo wi = ((AppState.Success) appState).getServerResponseData();
             show(wi);
         }
         if(appState instanceof AppState.Loading){
-            Log.d("tag","загружаюсь жес");
+            Log.d("tag","loading");
         }
         if(appState instanceof AppState.Error){
-            Log.d("tag","ебать ты баран");
             Log.d("tag",((AppState.Error) appState).getError().getMessage());
         }
     }

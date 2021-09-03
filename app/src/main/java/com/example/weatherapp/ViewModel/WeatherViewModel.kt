@@ -11,10 +11,10 @@ import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 class WeatherViewModel(
-    private val liveDataForViewToObserve: MutableLiveData<AppState> = MutableLiveData(),
     private val retrofitImpl: WeatherAPIImpl = WeatherAPIImpl()
 ) : ViewModel(), CoroutineScope by MainScope() {
 
+    private val liveDataForViewToObserve: MutableLiveData<AppState> = MutableLiveData()
 
     fun getData(): LiveData<AppState> {
         return liveDataForViewToObserve
