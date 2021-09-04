@@ -1,10 +1,11 @@
-package com.example.weatherapp
+package com.example.weatherapp.Model
 
 import android.app.Application
+import com.example.weatherapp.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class App:Application() {
+class App :Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {

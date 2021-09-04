@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="search_title_margin_start">10dp</dimen>
+    <dimen name="search_title_margin_top">10dp</dimen>
+    <dimen name="search_title_margin_bottom">15dp</dimen>
+    <dimen name="search_title_text_size">18sp</dimen>
+    <dimen name="search_input_margin_bottom">10dp</dimen>
+    <dimen name="search_input_box_radius">30dp</dimen>
+    <dimen name="weather_fragment_title_text_size">18sp</dimen>
+    <dimen name="weather_fragment_title_margin_start">5dp</dimen>
+    <dimen name="weather_fragment_info_text_size">24sp</dimen>
+    <dimen name="weather_fragment_info_margin_start">15dp</dimen>
+</resources>

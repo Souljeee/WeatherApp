@@ -3,6 +3,8 @@ package com.example.weatherapp.View;
 import static org.koin.android.compat.ViewModelCompat.getViewModel;
 import static org.koin.android.compat.ViewModelCompat.viewModel;
 import androidx.lifecycle.ViewModelProvider;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,12 +33,10 @@ import static org.koin.java.KoinJavaComponent.inject;
 
 
 public class WeatherFragment extends Fragment {
-
+    public final String CITY_NAME = "CITY_NAME";
     private WeatherViewModel mViewModel;
     private WeatherFragmentBinding binding;
     private String cityName;
-
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -50,7 +50,7 @@ public class WeatherFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle = this.getArguments();
         if(bundle != null){
-            cityName = bundle.getString("CITY_NAME");
+            cityName = bundle.getString(CITY_NAME);
         }
     }
 
@@ -81,11 +81,11 @@ public class WeatherFragment extends Fragment {
     }
 
     private void show(WeatherInfo wi) {
-        binding.description.setText(wi.getWeather().get(0).getDescription().toString());
-        binding.temp.setText(String.valueOf(wi.getMain().getTemp()));
-        binding.feelsLike.setText(String.valueOf(wi.getMain().getFeels_like()));
-        binding.minTemp.setText(String.valueOf(wi.getMain().getTemp_min()));
-        binding.maxTemp.setText(String.valueOf(wi.getMain().getTemp_max()));
+        binding.description.setText(wi.getWeather().get(0).getDescription());
+        binding.temp.setText(wi.getMain().getTemp() +"°C");
+        binding.feelsLike.setText(wi.getMain().getFeels_like() +"°C");
+        binding.minTemp.setText(wi.getMain().getTemp_min() +"°C");
+        binding.maxTemp.setText(wi.getMain().getTemp_max() +"°C");
         binding.windSpeed.setText(String.valueOf(wi.getWind().getSpeed()));
     }
 
@@ -93,7 +93,7 @@ public class WeatherFragment extends Fragment {
     public static WeatherFragment newInstance(String cityName) {
         WeatherFragment f = new WeatherFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("CITY_NAME",cityName);
+        bundle.putString(f.CITY_NAME, cityName);
         f.setArguments(bundle);
         return f;
     }
